@@ -1,3 +1,10 @@
+Django Axes
+===========
+
+.. image:: https://secure.travis-ci.org/codekoala/django-axes.png?branch=master
+    :alt: Build Status
+    :target: http://travis-ci.org/codekoala/django-axes
+
 ``django-axes`` is a very simple way for you to keep track of failed login
 attempts, both for the Django admin and for the rest of your site.  The name is
 sort of a geeky pun, since ``axes`` can be read interpreted as:
@@ -15,43 +22,29 @@ Requirements
 work around the Django admin and the regular ``django.contrib.auth``
 login-powered pages.
 
+
 Installation
 ============
 
-Download ``django-axes`` using **one** of the following methods:
+Download and install ``django-axes`` using **one** of the following methods:
 
-easy_install
-------------
+PIP
+---
 
-You can download the package from the `CheeseShop <http://pypi.python.org/pypi/django-axes/>`_ or use::
+You can install the latest stable package running this command::
 
-    easy_install django-axes
+    $ pip install django-axes
 
-to download and install ``django-axes``.
+Also you can install the development version running this command::
 
-Package Download
-----------------
+    $ pip install -e git+http://github.com/codekoala/django-axes.git#egg=django_axes-dev
 
-Download the latest ``.tar.gz`` file from the downloads section and extract it
-somewhere you'll remember.  Use ``python setup.py install`` to install it.
+Setuptools
+----------
 
-Checkout from Mercurial
------------------------
+You can install the latest stable package running::
 
-Execute the following command (or use the equivalent function in a GUI such as
-TortoiseHg), and make sure you're checking ``django-axes`` out somewhere on the
-``PYTHONPATH``::
-
-    hg clone http://django-axes.googlecode.com/hg django-axes
-    hg clone http://bitbucket.org/codekoala/django-axes
-
-Checkout from GitHub
---------------------
-
-Execute the following command, and make sure you're checking ``django-axes``
-out somewhere on the ``PYTHONPATH``::
-
-    git clone git://github.com/codekoala/django-axes.git
+    $ easy_install django-axes
 
 Verifying Installation
 ----------------------
@@ -64,6 +57,20 @@ is to execute a command such as::
 If that command completes with some sort of version number, you're probably
 good to go.  If you see error output, you need to check your installation (I'd
 start with your ``PYTHONPATH``).
+
+
+Development
+===========
+
+You can contribute to this project forking it from github and sending pull requests.
+
+Running tests
+-------------
+
+Tests can be run, after you clone the repository and having django installed, like::
+
+    $ PYTHONPATH=$PYTHONPATH:$PWD django-admin.py test axes --settings=axes.test_settings
+
 
 Configuration
 =============
@@ -91,12 +98,7 @@ Next, install the ``FailedLoginMiddleware`` middleware::
         'axes.middleware.FailedLoginMiddleware'
     )
 
-Finally, if you're using Django's @staff_member_required, you'll want to start
-importing this from axes rather than from Django::
-
-    from axes.decorators import staff_member_required
-
-Run ``manage.py syncdb``.  This creates the appropriate tables in your database
+Run ``python manage.py syncdb``.  This creates the appropriate tables in your database
 that are necessary for operation.
 
 Customizing Axes
@@ -142,10 +144,11 @@ By default, django-axes will lock out repeated attempts from the same IP
 address.  You can allow this IP to attempt again by deleting the relevant
 ``AccessAttempt`` records in the admin.
 
-You can also use the ``reset`` management command. Using django's manage.py.
+You can also use the ``axes_reset`` management command (since 1.2.5-rc1). Using Django's
+``manage.py``.
 
-* ``manage.py reset`` will reset all lockouts and access records.
-* ``manage.py reset ip`` will clear lockout/records for ip
+* ``manage.py axes_reset`` will reset all lockouts and access records.
+* ``manage.py axes_reset ip`` will clear lockout/records for ip
 
 In your code, you can use ``from axes.utils import reset``.
 

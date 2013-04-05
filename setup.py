@@ -2,17 +2,19 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
-import axes
 
 setup(
     name='django-axes',
-    version=axes.get_version(),
+    version='1.3.0',
     description="Keep track of failed login attempts in Django-powered sites.",
-    long_description=open('README.rst', 'r').read(),
+    long_description=(open('README.rst', 'r').read() + '\n' +
+        open('CHANGES.txt', 'r').read()),
     keywords='django, security, authentication',
     author='Josh VanderLinden, Philip Neustrom, Michael Blume',
     author_email='codekoala@gmail.com',
-    url='http://bitbucket.org/codekoala/django-axes/',
+    maintainer='Alex Clark',
+    maintainer_email='aclark@aclark.net',
+    url='https://github.com/codekoala/django-axes',
     license='MIT',
     package_dir={'axes': 'axes'},
     include_package_data=True,
